@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>leetcode算法#7整数反转 &middot; 　　　　　　　　　　　</title>
+  <meta name="description" content="" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  
+  
+  
+  
+  <link href="https://SummerCaprice.github.io/css/concated.min.css" rel="stylesheet">
+  
+  
+</head>
+
+  <body class="single-body">
+    <nav class="nav-bar side-padding">
+  <h1 class="nav-header"><a href="https://SummerCaprice.github.io/" class="nav-text">Summer Caprice</a></h1>
+  <div class="hamburger-menu">
+    <button onclick="hamburgerMenuPressed.call(this)" aria-haspopup="true" aria-expanded="false" aria-controls="menu" aria-label="Menu">
+      <span></span>
+      <span></span>
+    </button>
+    <ul id="menu" class="hamburger-menu-overlay">
+      <li><a href="https://SummerCaprice.github.io/" class="hamburger-menu-overlay-link">Home</a></li>
+      <li><a href="https://SummerCaprice.github.io//tags" class="hamburger-menu-overlay-link">Tags</a></li>
+      
+    </ul>
+  </div>
+</nav>
+    <main class="content side-text-padding">
+      <article class="post dropcase">
+        <header class="post-header">
+        	<h1 class="post-title">leetcode算法#7整数反转</h1>
+          <p class="post-date">Posted <time datetime="2019-06-17">Jun 17, 2019</time></p>
+        </header>
+        
+        
+
+<h3 id="题目">题目</h3>
+
+<p>给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。
+补充：反转反符号不变，原数据以0结尾的，反转后前边的0要去掉，反转后数据的取值范围是 [−2^31,  2^31 − 1]
+<strong><em>示例</em></strong></p>
+
+<pre><code>输入: -120
+输出: -21
+</code></pre>
+
+<h4 id="思路-栈">思路：栈</h4>
+
+<p>遇到反转之类的题目首先想到就是先进后出的栈结构，但是这道题目有一个特殊性，处理的数据为纯数字，通常数字问题可以用数学方法来得出更高效的答案。看到这个题目的第一想法是用字符串反转的方法，但是尝试过后发现这个写不仅要考虑符号问题，还要考虑反转后字符串前边0的问题，这显然不是一个好的答案，然后就想到了用栈，构建一个栈，然后pop,push，这个思路中规中矩，但是这个代码量来处理这样一个问题显然有点小题大做。比较简单的栈就是数组，反向遍历一下就是栈。</p>
+
+<h4 id="方法1-数字转数组-反向遍历数组">方法1：数字转数组，反向遍历数组</h4>
+
+<pre><code>class Solution {
+
+    /**
+     * @param Integer $x
+     * @return Integer
+     */
+    function reverse($x) {
+        $x_arr = str_split($x);
+        $res = '';
+        for ($i=count($x_arr)-1; $i&gt;-1; $i--) { 
+            if($x_arr[$i]!=0 || $res != ''){
+                $res.=$x_arr[$i];
+            }
+        }
+        $res = intval($res) * ($x&gt;0?1:-1);
+
+        if($res &gt; 2147483647  || $res &lt; -2147483648){
+            return 0;
+        }else{
+            return $res;
+        }
+    }
+}
+</code></pre>
+
+<p>时间复杂度：O(log(x)),x为数据的位数
+空间复杂度：O(1)</p>
+
+<h4 id="方法2-数学方法实现栈操作">方法2：数学方法实现栈操作</h4>
+
+<pre><code>class Solution {
+
+    /**
+     * @param Integer $x
+     * @return Integer
+     */
+    function reverse($x) {
+        $symbol = $x &gt; 0 ? 1 : -1;
+        $x = \abs($x);
+        $r = 0;
+        
+        while($x &gt; 0){
+            $temp = $x % 10;//取模求末位数push
+            $r *= 10;
+            $r += $temp;
+            $x = intval($x / 10);//pop
+        }
+
+        $res = $symbol * $r;
+
+        if($res &gt; 2147483647  || $res &lt; -2147483648){
+            return 0;
+        }else{
+            return $res;
+        }
+    }
+}
+</code></pre>
+
+<p>时间复杂度：O(log(x)),x为数据的位数
+空间复杂度：O(1)</p>
+
+      </article>
+      
+    </main>
+    <nav class="end-nav side-padding">
+      
+      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
+  href="https://SummerCaprice.github.io/" class="card home-card" style="background-image: url( https://SummerCaprice.github.io/img/grey-cloud.jpg )" rel="bookmark" >
+  Home
+</a>
+    </nav>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+  
+  <script src="https://SummerCaprice.github.io/js/core.min.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+  </body>
+</html>

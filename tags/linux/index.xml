@@ -1,0 +1,24 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>linux - 　　　　　　　　　　　</title>
+    <link>https://SummerCaprice.github.io/tags/linux/</link>
+    <description>Recent content in linux on 　　　　　　　　　　　</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 18 Jun 2019 15:01:34 +0800</lastBuildDate>
+    
+        <atom:link href="https://SummerCaprice.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>BashOnWindows的安装,卸载与重装</title>
+      <link>https://SummerCaprice.github.io/post/bashonwin_install/</link>
+      <pubDate>Tue, 18 Jun 2019 15:01:34 +0800</pubDate>
+      
+      <guid>https://SummerCaprice.github.io/post/bashonwin_install/</guid>
+      <description>首次安装  开始-&amp;gt;设置-&amp;gt;更新与安全-&amp;gt;针对开发人员, 选择&amp;rdquo;开发人员模式&amp;ldquo; 控制面板-&amp;gt;程序-&amp;gt;启用或关闭Windows功能, 勾选适用于Linux的Windows子系统, 并重启 cmd命令行输入bash命令进行安装, 中途需要选择一些安装选项(通常是一路y下去) 需要创建账号, root账号需要修改密码后才可以使用(sudo passwd root)  卸载  保存家目录并卸载ubuntu, cmd下输入如下命令
+lxrun /uninstall  windows会询问一些选项让你来确认, 如果要一次性执行下去, 可以使用以下命令人代替:
+lxrun /uninstall /y  完全卸载
+lxrun /uninstall /full   重装 lxrun /install  完全移除Win10上的bash工具 在卸载BashOnWindows的前提下还需要在控制面板-&amp;gt;程序-&amp;gt;启用或关闭windows功能里勾掉适用于Linux的Windows子系统 , 并保存设置</description>
+    </item>
+  </channel>
+</rss>

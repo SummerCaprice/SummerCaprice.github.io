@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>BashOnWindows的安装,卸载与重装 &middot; 　　　　　　　　　　　</title>
+  <meta name="description" content="" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  
+  
+  
+  
+  <link href="https://SummerCaprice.github.io/css/concated.min.css" rel="stylesheet">
+  
+  
+</head>
+
+  <body class="single-body">
+    <nav class="nav-bar side-padding">
+  <h1 class="nav-header"><a href="https://SummerCaprice.github.io/" class="nav-text">Summer Caprice</a></h1>
+  <div class="hamburger-menu">
+    <button onclick="hamburgerMenuPressed.call(this)" aria-haspopup="true" aria-expanded="false" aria-controls="menu" aria-label="Menu">
+      <span></span>
+      <span></span>
+    </button>
+    <ul id="menu" class="hamburger-menu-overlay">
+      <li><a href="https://SummerCaprice.github.io/" class="hamburger-menu-overlay-link">Home</a></li>
+      <li><a href="https://SummerCaprice.github.io//tags" class="hamburger-menu-overlay-link">Tags</a></li>
+      
+    </ul>
+  </div>
+</nav>
+    <main class="content side-text-padding">
+      <article class="post dropcase">
+        <header class="post-header">
+        	<h1 class="post-title">BashOnWindows的安装,卸载与重装</h1>
+          <p class="post-date">Posted <time datetime="2019-06-18">Jun 18, 2019</time></p>
+        </header>
+        
+        
+
+<h3 id="首次安装">首次安装</h3>
+
+<ol>
+<li>开始-&gt;设置-&gt;更新与安全-&gt;针对开发人员, 选择&rdquo;<strong>开发人员模式</strong>&ldquo;</li>
+<li>控制面板-&gt;程序-&gt;启用或关闭Windows功能, 勾选<strong>适用于Linux的Windows子系统</strong>, 并重启</li>
+<li>cmd命令行输入bash命令进行安装, 中途需要选择一些安装选项(通常是一路y下去)</li>
+<li>需要创建账号, root账号需要修改密码后才可以使用(sudo passwd root)</li>
+</ol>
+
+<h3 id="卸载">卸载</h3>
+
+<ol>
+<li><p>保存家目录并卸载ubuntu, cmd下输入如下命令</p>
+
+<pre><code>lxrun /uninstall
+</code></pre>
+
+<p>windows会询问一些选项让你来确认, 如果要一次性执行下去, 可以使用以下命令人代替:</p>
+
+<pre><code>lxrun /uninstall /y
+</code></pre></li>
+
+<li><p>完全卸载</p>
+
+<pre><code>lxrun /uninstall /full
+</code></pre></li>
+</ol>
+
+<h3 id="重装">重装</h3>
+
+<pre><code>lxrun /install
+</code></pre>
+
+<h3 id="完全移除win10上的bash工具">完全移除Win10上的bash工具</h3>
+
+<p>在卸载BashOnWindows的前提下还需要在<strong>控制面板</strong>-&gt;<strong>程序</strong>-&gt;<strong>启用或关闭windows功能</strong>里勾掉<strong>适用于Linux的Windows子系统</strong> , 并保存设置</p>
+
+      </article>
+      
+    </main>
+    <nav class="end-nav side-padding">
+      
+      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
+  href="https://SummerCaprice.github.io/post/leetcode07/" class="card blog-card" rel="bookmark" >
+    
+  <article class="card-body">
+    <h2 class="card-title">leetcode算法#7整数反转</h2>
+    <p class="card-text"></p>
+    <div class="card-subtext muted-text">
+      <p>Posted <time datetime="2019-06-17 617:00">Jun 17, 2019</time></p>
+      
+    </div>
+  </article>
+</a>
+      
+      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
+  href="https://SummerCaprice.github.io/" class="card home-card" style="background-image: url( https://SummerCaprice.github.io/img/grey-cloud.jpg )" rel="bookmark" >
+  Home
+</a>
+    </nav>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+  
+  <script src="https://SummerCaprice.github.io/js/core.min.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+  </body>
+</html>
