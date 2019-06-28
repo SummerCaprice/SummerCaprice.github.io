@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>php7.1特性负字符串偏移量的坑 &middot; 　　　　　　　　　　　</title>
+  <meta name="description" content="" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  
+  
+  
+  
+  <link href="https://summercaprice.github.io/css/concated.min.css" rel="stylesheet">
+  
+  
+</head>
+
+  <body class="single-body">
+    <nav class="nav-bar side-padding">
+  <h1 class="nav-header"><a href="https://summercaprice.github.io/" class="nav-text">Summer Caprice</a></h1>
+  <div class="hamburger-menu">
+    <button onclick="hamburgerMenuPressed.call(this)" aria-haspopup="true" aria-expanded="false" aria-controls="menu" aria-label="Menu">
+      <span></span>
+      <span></span>
+    </button>
+    <ul id="menu" class="hamburger-menu-overlay">
+      <li><a href="https://summercaprice.github.io/" class="hamburger-menu-overlay-link">Home</a></li>
+      <li><a href="https://summercaprice.github.io//tags" class="hamburger-menu-overlay-link">Tags</a></li>
+      
+    </ul>
+  </div>
+</nav>
+    <main class="content side-text-padding">
+      <article class="post dropcase">
+        <header class="post-header">
+        	<h1 class="post-title">php7.1特性负字符串偏移量的坑</h1>
+          <p class="post-date">Posted <time datetime="2019-06-28">Jun 28, 2019</time></p>
+        </header>
+        
+        
+
+<h4 id="问题复现">问题复现</h4>
+
+<h5 id="背景">背景</h5>
+
+<p>使用php语言解答leetcode算法题#67二进制求和问题时 , 本地运行结果与leetcode执行结果不一致</p>
+
+<h5 id="题目描述">题目描述</h5>
+
+<p>给定两个二进制字符串，返回他们的和（用二进制表示）。输入为非空字符串且只包含数字 1 和 0。</p>
+
+<p>示例 1:</p>
+
+<p>输入: a = &ldquo;11&rdquo;, b = &ldquo;1&rdquo;
+输出: &ldquo;100&rdquo;</p>
+
+<p>示例 2:</p>
+
+<p>输入: a = &ldquo;1010&rdquo;, b = &ldquo;1011&rdquo;
+输出: &ldquo;10101&rdquo;</p>
+
+<h5 id="思路">思路</h5>
+
+<p>逆序遍历a, b 两,逐位相加 , 单独处理最后一次的进位</p>
+
+<h5 id="解答版本1">解答版本1</h5>
+
+<pre><code>function addBinary($a, $b)
+    {
+        $a_pos = strlen($a) - 1;
+        $b_pos = strlen($b) - 1;
+        $carry = 0;
+        $res = '';
+        while ($a_pos&gt;=0 || $b_pos&gt;=0) {
+            $t_a = isset($a[$a_pos]) ? $a[$a_pos] : 0;
+            $t_b = isset($b[$b_pos]) ? $b[$b_pos] : 0;
+            $t = $t_a + $t_b + $carry;
+
+            if ($t &gt;= 2) {
+                $t = $t % 2;
+                $carry = 1;
+            } else {
+                $carry = 0;
+            }
+            $res = $t.$res;
+
+            $a_pos--;
+            $b_pos--;
+        }
+
+        if($carry == 1){
+            $res = &quot;1&quot;.$res;
+        }
+
+        return $res;
+    }
+</code></pre>
+
+<h5 id="执行结果">执行结果</h5>
+
+<p>本地环境输入数据a = 11 , b = 1 , 结果为 100 ,
+ 在leetcode的测试里跑这段代码 , 结果是 110</p>
+
+<h5 id="分析">分析</h5>
+
+<p>leetcode结果为11+11 的结果 , 说明在第2次循环中多加了1次1 , 每次计算结果进位的代码在</p>
+
+<pre><code>$t = $t_a + $t_b + $carry
+</code></pre>
+
+<p>, 首先排除$carry 变量的问题 , 更换测试数据 11+ 11 结果为110 ,结果正确 , 再拿不同长度的a与b测试 , 发现leetcode环境下 , 输入不等长的值为全1的a ,b, 结果都是等长的a 与b相加的结果 . 断定出错的代码为长度较短的字母所在(比如b)</p>
+
+<pre><code>$t_b = isset($b[$b_pos]) ? $b[$b_pos] : 0; 
+</code></pre>
+
+<p>也就是说当$b_pos 小于0 的时候 isset() 返回了true ,\$t_b存在负数下标 , 里还有值 . 检查环境得知 , 本地使用的是php7.0, leetcode使用的是php7.2 , google了php 字符串负数下标得知这是php7.1加入的特性 .支持为负的字符串偏移量 , 负偏移量为逆序偏移量.</p>
+
+<h4 id="解答版本2">解答版本2</h4>
+
+<pre><code>    function addBinary($a, $b)
+    {
+        $a_pos = strlen($a) - 1;
+        $b_pos = strlen($b) - 1;
+        $carry = 0;
+        $res = '';
+        while ($a_pos&gt;=0 || $b_pos&gt;=0) {
+            $t_a = $a_pos &gt; -1 ? $a[$a_pos] : 0; //判断改为对下标的判断
+            $t_b = $b_pos &gt; -1 ? $b[$b_pos] : 0;
+            $t = $t_a + $t_b + $carry;
+
+            if ($t &gt;= 2) {
+                $t = $t % 2;
+                $carry = 1;
+            } else {
+                $carry = 0;
+            }
+            $res = $t.$res;
+
+            $a_pos --;
+            $b_pos --;
+        }
+
+        if($carry == 1){
+            $res = &quot;1&quot;.$res;
+        }
+
+        return $res;
+    }
+        
+</code></pre>
+
+      </article>
+      
+    </main>
+    <nav class="end-nav side-padding">
+      
+      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
+  href="https://summercaprice.github.io/post/bashonwin_install/" class="card blog-card" rel="bookmark" >
+    
+  <article class="card-body">
+    <h2 class="card-title">BashOnWindows的安装,卸载与重装</h2>
+    <p class="card-text"></p>
+    <div class="card-subtext muted-text">
+      <p>Posted <time datetime="2019-06-18 618:00">Jun 18, 2019</time></p>
+      
+    </div>
+  </article>
+</a>
+      
+      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
+  href="https://summercaprice.github.io/" class="card home-card" style="background-image: url( https://summercaprice.github.io/img/grey-cloud.jpg )" rel="bookmark" >
+  Home
+</a>
+    </nav>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+  
+  <script src="https://summercaprice.github.io/js/core.min.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+  </body>
+</html>
