@@ -1,20 +1,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>BashOnWindows - 　　　　　　　　　　　</title>
-    <link>//https://summercaprice.github.io/tags/bashonwindows/</link>
+    <link>https://summercaprice.github.io/tags/bashonwindows/</link>
     <description>Recent content in BashOnWindows on 　　　　　　　　　　　</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Tue, 18 Jun 2019 15:01:34 +0800</lastBuildDate>
     
-        <atom:link href="//https://summercaprice.github.io/tags/bashonwindows/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://summercaprice.github.io/tags/bashonwindows/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>BashOnWindows(wsl)的安装,卸载与重装</title>
-      <link>//https://summercaprice.github.io/post/bashonwin_install/</link>
+      <link>https://summercaprice.github.io/post/bashonwin_install/</link>
       <pubDate>Tue, 18 Jun 2019 15:01:34 +0800</pubDate>
       
-      <guid>//https://summercaprice.github.io/post/bashonwin_install/</guid>
+      <guid>https://summercaprice.github.io/post/bashonwin_install/</guid>
       <description>前提 win10不是所有版本都能安装wsl,生成版本 &amp;lt; 16215的无法安装wsl，生成版本大于16215的还分两种情况，一种需要在cmd命令行安装，另一种情况需要在应用商店安装，具体分界线在哪，我不清楚。 查看生成版本： 进入powershell，输入winver命令，弹出框里显示的OS内部版本就是生成版本
 首次安装  开始-&amp;gt;设置-&amp;gt;更新与安全-&amp;gt;针对开发人员, 选择&amp;rdquo;开发人员模式&amp;ldquo; 控制面板-&amp;gt;程序-&amp;gt;启用或关闭Windows功能, 勾选适用于Linux的Windows子系统, 并重启（如果系统里看不到这个选项就是生成版本不够原因） cmd命令行输入bash命令进行安装, 中途需要选择一些安装选项(通常是一路y下去)（pps: 如果显示bash不是内部命令,则需要到应用商店安装） 需要创建账号, root账号需要修改密码后才可以使用(sudo passwd root)  卸载  保存家目录并卸载ubuntu, cmd下输入如下命令
 lxrun /uninstall  windows会询问一些选项让你来确认, 如果要一次性执行下去, 可以使用以下命令人代替:
