@@ -1,20 +1,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>栈 - 　　　　　　　　　　　</title>
-    <link>https://summercaprice.github.io/tags/%E6%A0%88/</link>
+    <link>//https://summercaprice.github.io/tags/%E6%A0%88/</link>
     <description>Recent content in 栈 on 　　　　　　　　　　　</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Mon, 17 Jun 2019 15:01:34 +0800</lastBuildDate>
     
-        <atom:link href="https://summercaprice.github.io/tags/%E6%A0%88/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="//https://summercaprice.github.io/tags/%E6%A0%88/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>leetcode算法#7整数反转</title>
-      <link>https://summercaprice.github.io/post/leetcode07/</link>
+      <link>//https://summercaprice.github.io/post/leetcode07/</link>
       <pubDate>Mon, 17 Jun 2019 15:01:34 +0800</pubDate>
       
-      <guid>https://summercaprice.github.io/post/leetcode07/</guid>
+      <guid>//https://summercaprice.github.io/post/leetcode07/</guid>
       <description>题目 给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。 补充：反转反符号不变，原数据以0结尾的，反转后前边的0要去掉，反转后数据的取值范围是 [−2^31, 2^31 − 1] 示例
 输入: -120 输出: -21  思路：栈 遇到反转之类的题目首先想到就是先进后出的栈结构，但是这道题目有一个特殊性，处理的数据为纯数字，通常数字问题可以用数学方法来得出更高效的答案。看到这个题目的第一想法是用字符串反转的方法，但是尝试过后发现这个写不仅要考虑符号问题，还要考虑反转后字符串前边0的问题，这显然不是一个好的答案，然后就想到了用栈，构建一个栈，然后pop,push，这个思路中规中矩，但是这个代码量来处理这样一个问题显然有点小题大做。比较简单的栈就是数组，反向遍历一下就是栈。
 方法1：数字转数组，反向遍历数组 class Solution { /** * @param Integer $x * @return Integer */ function reverse($x) { $x_arr = str_split($x); $res = &#39;&#39;; for ($i=count($x_arr)-1; $i&amp;gt;-1; $i--) { if($x_arr[$i]!=0 || $res != &#39;&#39;){ $res.=$x_arr[$i]; } } $res = intval($res) * ($x&amp;gt;0?1:-1); if($res &amp;gt; 2147483647 || $res &amp;lt; -2147483648){ return 0; }else{ return $res; } } }  时间复杂度：O(log(x)),x为数据的位数 空间复杂度：O(1)</description>

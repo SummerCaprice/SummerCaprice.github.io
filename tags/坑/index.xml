@@ -1,20 +1,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>坑 - 　　　　　　　　　　　</title>
-    <link>https://summercaprice.github.io/tags/%E5%9D%91/</link>
+    <link>//https://summercaprice.github.io/tags/%E5%9D%91/</link>
     <description>Recent content in 坑 on 　　　　　　　　　　　</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Fri, 28 Jun 2019 15:22:34 +0800</lastBuildDate>
     
-        <atom:link href="https://summercaprice.github.io/tags/%E5%9D%91/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="//https://summercaprice.github.io/tags/%E5%9D%91/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>php7.1特性负字符串偏移量的坑</title>
-      <link>https://summercaprice.github.io/post/negative_string_offsets/</link>
+      <link>//https://summercaprice.github.io/post/negative_string_offsets/</link>
       <pubDate>Fri, 28 Jun 2019 15:22:34 +0800</pubDate>
       
-      <guid>https://summercaprice.github.io/post/negative_string_offsets/</guid>
+      <guid>//https://summercaprice.github.io/post/negative_string_offsets/</guid>
       <description>问题复现 背景 使用php语言解答leetcode算法题#67二进制求和问题时 , 本地运行结果与leetcode执行结果不一致
 题目描述 给定两个二进制字符串，返回他们的和（用二进制表示）。输入为非空字符串且只包含数字 1 和 0。
 示例 1:
